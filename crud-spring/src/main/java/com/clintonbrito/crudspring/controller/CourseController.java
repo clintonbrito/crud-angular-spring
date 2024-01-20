@@ -20,19 +20,15 @@ public class CourseController {
     this.courseRepository = courseRepository;
   }
 
-  // @RequestMapping(method = RequestMethod.GET) // mesma coisa que o @GetMapping abaixo
   @GetMapping
   public List<CourseModel> list() {
     return courseRepository.findAll();
   }
 
-  //  @RequestMapping(method = RequestMethod.POST) // mesma coisa que o @PostMapping abaixo
   @PostMapping
   @ResponseStatus(code = HttpStatus.CREATED)
   public CourseModel create(@RequestBody CourseModel course) {
         return courseRepository.save(course);
-//        return ResponseEntity.status(HttpStatus.CREATED);
-//          .body(courseRepository.save(course));
   }
 
 
