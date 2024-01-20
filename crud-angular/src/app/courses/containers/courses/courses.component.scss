@@ -1,0 +1,31 @@
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center; // não fez diferença ainda, testar
+}
+
+.column-flex {
+  display: flex;
+  flex-direction: column; // não fez diferença ainda, testar
+  min-width: 300px;
+}
+
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 25px;
+}
+
+mat-toolbar {
+  min-width: 300px;
+}
+
+// mat-card-actions {
+//   justify-content: center;
+// }
+
+// button {
+//   margin: 5px;
+// }
