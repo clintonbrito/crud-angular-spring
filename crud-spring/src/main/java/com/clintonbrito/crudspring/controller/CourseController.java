@@ -15,7 +15,6 @@ public class CourseController {
 
   private final CourseRepository courseRepository;
 
-  // Construtor da classe CourseController que recebe um objeto do tipo CourseRepository e atribui a variável courseRepository
   public CourseController(CourseRepository courseRepository) {
     this.courseRepository = courseRepository;
   }
@@ -25,10 +24,17 @@ public class CourseController {
     return courseRepository.findAll();
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<CourseModel> findById(@PathVariable Long id) {
+    return courseRepository.findById(id)
+            .map(response -> ResponseEntity.ok().body(response))
+            .orElse(ResponseEntity.notFound().build());
+  }
+
   @PostMapping
   @ResponseStatus(code = HttpStatus.CREATED)
   public CourseModel create(@RequestBody CourseModel course) {
-        return courseRepository.save(course);
+    return courseRepository.save(course);
   }
 
 

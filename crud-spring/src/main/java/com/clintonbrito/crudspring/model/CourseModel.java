@@ -18,7 +18,6 @@ public class CourseModel {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @JsonProperty("_id")
-  // @JsonIgnore // já aqui ele não mostraria a chave-valor id no resultado da requisição
   private Long id;
   
   @Column(name = "nome", length = 200, nullable = false)
