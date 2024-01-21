@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first } from 'rxjs';
+import { Observable, first } from 'rxjs';
 
 import { Course } from '../model/course';
 
@@ -19,6 +19,10 @@ export class CoursesService {
         // delay(5000),
         // tap(courses => console.log(courses))
         );
+  }
+
+  findById(id: string): Observable<Course> {
+    return this.httpClient.get<Course>(`${this.API}/${id}`);
   }
 
   save(record: Partial<Course>) {
