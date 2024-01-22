@@ -8,7 +8,7 @@ import { Course } from './../model/course';
 export const courseResolver: ResolveFn<Course> =
   (route: ActivatedRouteSnapshot, _state: RouterStateSnapshot) => {
     if(route.params['id']) {
-      return inject(CoursesService).findById(route.paramMap.get('id')!);
+      return inject(CoursesService).loadById(route.paramMap.get('id')!);
     }
     return of({ _id: '', name: '', category: '' });
   }
