@@ -26,16 +26,11 @@ export class CoursesService {
   }
 
   save(data: Partial<Course>) {
-    // console.log('primeiro console: ', data);
-
-    // data._id ? this.update(data) : this.create(data);
 
     if (data._id) {
-      // console.log('updated: ', data);
       return this.update(data);
     }
 
-    // console.log('created: ', data);
     return this.create(data);
   }
 
