@@ -1,0 +1,18 @@
+meta {
+  name: Update Course
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseURL}}/api/courses/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "name": "React",
+      "category": "front-end"
+    }
+}
