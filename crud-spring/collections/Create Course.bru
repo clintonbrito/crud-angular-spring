@@ -1,17 +1,17 @@
 meta {
-  name: Update Course
+  name: Create Course
   type: http
-  seq: 4
+  seq: 3
 }
 
-put {
-  url: {{baseURL}}/api/courses/2
+post {
+  url: {{baseURL}}/api/courses
   body: json
   auth: none
 }
 
 body:json {
-  {
+    {
       "name": "React",
       "category": "front-end"
     }
