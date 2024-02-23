@@ -1,0 +1,11 @@
+meta {
+  name: Delete Course
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseURL}}/api/courses/2
+  body: json
+  auth: none
+}
