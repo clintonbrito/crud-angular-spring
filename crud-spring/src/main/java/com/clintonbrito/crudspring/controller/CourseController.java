@@ -1,7 +1,6 @@
 package com.clintonbrito.crudspring.controller;
 
 import com.clintonbrito.crudspring.dto.CourseDTO;
-import com.clintonbrito.crudspring.model.CourseModel;
 import com.clintonbrito.crudspring.service.CourseService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -29,18 +28,18 @@ public class CourseController {
   }
 
   @GetMapping("/{id}")
-  public CourseModel findById(@PathVariable @NotNull @Positive Long id) {
+  public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
     return courseService.findById(id);
   }
 
   @PostMapping
   @ResponseStatus(code = HttpStatus.CREATED)
-  public CourseModel create(@RequestBody @Valid CourseModel course) {
+  public CourseDTO create(@RequestBody @Valid @NotNull CourseDTO course) {
     return courseService.create(course);
   }
 
   @PutMapping("/{id}")
-  public CourseModel update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid CourseModel course) {
+  public CourseDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid @NotNull CourseDTO course) {
     return courseService.update(id, course);
   }
 
