@@ -14,7 +14,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 
 @Data // está incluso os getters e setters do Lombok

@@ -1,5 +1,7 @@
 package com.clintonbrito.crudspring.service;
 
+import com.clintonbrito.crudspring.dto.CourseDTO;
+import com.clintonbrito.crudspring.dto.mapper.CourseMapper;
 import com.clintonbrito.crudspring.exception.RecordNotFoundException;
 import com.clintonbrito.crudspring.model.CourseModel;
 import com.clintonbrito.crudspring.repository.CourseRepository;
@@ -9,8 +11,8 @@ import jakarta.validation.constraints.Positive;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Validated
@@ -18,13 +20,23 @@ import java.util.List;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final CourseMapper courseMapper;
 
-    public CourseService(CourseRepository courseRepository) {
+    public CourseService(CourseRepository courseRepository, CourseMapper courseMapper) {
         this.courseRepository = courseRepository;
+        this.courseMapper = courseMapper;
     }
 
-    public @ResponseBody List<CourseModel> list() {
-        return courseRepository.findAll();
+    public List<CourseDTO> list() {
+        List<CourseModel> courses = courseRepository.findAll();
+        List<CourseDTO> DTOs = new ArrayList<>(courses.size());
+
+        for (CourseModel course : courses) {
+            CourseDTO DTO = new CourseDTO(course.getId(), course.getName(), course.getCategory());
+            DTOs.add(DTO);
+        }
+
+        return DTOs;
     }
 
     public CourseModel findById(@PathVariable @NotNull @Positive Long id) {

@@ -1,5 +1,6 @@
 package com.clintonbrito.crudspring.controller;
 
+import com.clintonbrito.crudspring.dto.CourseDTO;
 import com.clintonbrito.crudspring.model.CourseModel;
 import com.clintonbrito.crudspring.service.CourseService;
 import jakarta.validation.Valid;
@@ -23,7 +24,7 @@ public class CourseController {
   }
 
   @GetMapping
-  public List<CourseModel> list() {
+  public @ResponseBody List<CourseDTO> list() {
     return courseService.list();
   }
 
