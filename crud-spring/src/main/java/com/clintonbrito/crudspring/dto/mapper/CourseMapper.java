@@ -1,6 +1,7 @@
 package com.clintonbrito.crudspring.dto.mapper;
 
 import com.clintonbrito.crudspring.dto.CourseDTO;
+import com.clintonbrito.crudspring.enums.Category;
 import com.clintonbrito.crudspring.model.CourseModel;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class CourseMapper {
             return null;
         }
 
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory());
+    return new CourseDTO(course.getId(), course.getName(), "Front-end");
     }
 
     public CourseModel toEntity(CourseDTO courseDTO) {
@@ -27,7 +28,7 @@ public class CourseMapper {
         }
 
         course.setName(courseDTO.name());
-        course.setCategory(courseDTO.category());
+        course.setCategory(Category.FRONT_END);
         course.setStatus("Active");
 
         return course;

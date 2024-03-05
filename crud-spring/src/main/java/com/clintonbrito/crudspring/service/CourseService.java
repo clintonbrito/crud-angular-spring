@@ -2,6 +2,7 @@ package com.clintonbrito.crudspring.service;
 
 import com.clintonbrito.crudspring.dto.CourseDTO;
 import com.clintonbrito.crudspring.dto.mapper.CourseMapper;
+import com.clintonbrito.crudspring.enums.Category;
 import com.clintonbrito.crudspring.exception.RecordNotFoundException;
 import com.clintonbrito.crudspring.repository.CourseRepository;
 import jakarta.validation.Valid;
@@ -46,7 +47,7 @@ public class CourseService {
         return courseRepository.findById(id)
             .map(courseFound -> {
                 courseFound.setName(course.name());
-                courseFound.setCategory(course.category());
+                courseFound.setCategory(Category.FRONT_END);
                 return courseMapper.toDTO(courseRepository.save(courseFound));
             }).orElseThrow(() -> new RecordNotFoundException(id));
     }
