@@ -1,13 +1,13 @@
 package com.clintonbrito.crudspring.model;
 
 import com.clintonbrito.crudspring.enums.Category;
+import com.clintonbrito.crudspring.enums.Status;
 import com.clintonbrito.crudspring.enums.converters.CategoryConverter;
+import com.clintonbrito.crudspring.enums.converters.StatusConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
@@ -32,16 +32,13 @@ public class CourseModel {
   private String name;
 
   @NotNull
-//  @Length(max = 10)
-//  @Pattern(regexp = "Back-end|Front-end")
   @Column(name = "categoria", length = 10, nullable = false)
   @Convert(converter = CategoryConverter.class)
   private Category category;
 
   @NotNull
-  @Length(max = 10)
-  @Pattern(regexp = "Active|Inactive")
   @Column(length = 10, nullable = false)
-  private String status = "Active";
+  @Convert(converter = StatusConverter.class)
+  private Status status = Status.ACTIVE;
 
 }

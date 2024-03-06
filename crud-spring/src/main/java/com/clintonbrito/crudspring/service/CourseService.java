@@ -2,7 +2,6 @@ package com.clintonbrito.crudspring.service;
 
 import com.clintonbrito.crudspring.dto.CourseDTO;
 import com.clintonbrito.crudspring.dto.mapper.CourseMapper;
-import com.clintonbrito.crudspring.enums.Category;
 import com.clintonbrito.crudspring.exception.RecordNotFoundException;
 import com.clintonbrito.crudspring.repository.CourseRepository;
 import jakarta.validation.Valid;
@@ -10,7 +9,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class CourseService {
             .toList();
     }
 
-    public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
+    public CourseDTO findById(@NotNull @Positive Long id) {
         return courseRepository.findById(id)
             .map(courseMapper::toDTO)
             .orElseThrow(() -> new RecordNotFoundException(id));
@@ -47,7 +45,7 @@ public class CourseService {
         return courseRepository.findById(id)
             .map(courseFound -> {
                 courseFound.setName(course.name());
-                courseFound.setCategory(Category.FRONT_END);
+                courseFound.setCategory(courseMapper.convertCategoryValue(course.category()));
                 return courseMapper.toDTO(courseRepository.save(courseFound));
             }).orElseThrow(() -> new RecordNotFoundException(id));
     }

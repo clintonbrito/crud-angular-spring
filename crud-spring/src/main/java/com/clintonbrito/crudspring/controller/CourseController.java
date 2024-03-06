@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Validated // Serve para ativar de fato as validações que estão declaradas no parâmetro dos métodos
-@RestController
+@RestController // Já aplica automaticamente o @ResponseBody em todos os métodos
 @RequestMapping("/api/courses")
 public class CourseController {
 
@@ -23,7 +23,7 @@ public class CourseController {
   }
 
   @GetMapping
-  public @ResponseBody List<CourseDTO> list() {
+  public List<CourseDTO> list() {
     return courseService.list();
   }
 

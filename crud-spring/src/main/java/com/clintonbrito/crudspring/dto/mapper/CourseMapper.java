@@ -2,6 +2,7 @@ package com.clintonbrito.crudspring.dto.mapper;
 
 import com.clintonbrito.crudspring.dto.CourseDTO;
 import com.clintonbrito.crudspring.enums.Category;
+import com.clintonbrito.crudspring.enums.Status;
 import com.clintonbrito.crudspring.model.CourseModel;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ public class CourseMapper {
             return null;
         }
 
-    return new CourseDTO(course.getId(), course.getName(), "Front-end");
+    return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue());
     }
 
     public CourseModel toEntity(CourseDTO courseDTO) {
@@ -28,12 +29,25 @@ public class CourseMapper {
         }
 
         course.setName(courseDTO.name());
-        course.setCategory(Category.FRONT_END);
-        course.setStatus("Active");
+//        TODO: use a mapper for Category
+        course.setCategory(convertCategoryValue(courseDTO.category()));
+        course.setStatus(Status.ACTIVE);
 
         return course;
 
         // Builder pattern: estudar depois
+    }
+
+    public Category convertCategoryValue(String value) {
+        if (value == null) {
+            return null;
+        }
+
+        return switch (value) {
+            case "Front-end" -> Category.FRONT_END;
+            case "Back-end" -> Category.BACK_END;
+            default -> throw new IllegalArgumentException("Invalid category: " + value);
+        };
     }
 
 }
