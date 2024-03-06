@@ -1,5 +1,6 @@
 package com.clintonbrito.crudspring;
 
+import com.clintonbrito.crudspring.enums.Category;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +23,7 @@ public class CrudSpringApplication {
 
 			CourseModel c = new CourseModel();
 			c.setName("Angular com Spring");
-			c.setCategory("Front-end");
+			c.setCategory(Category.FRONT_END);
 
 			courseRepository.save(c);
 		};
