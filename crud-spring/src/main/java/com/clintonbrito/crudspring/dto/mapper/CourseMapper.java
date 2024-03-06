@@ -3,13 +3,13 @@ package com.clintonbrito.crudspring.dto.mapper;
 import com.clintonbrito.crudspring.dto.CourseDTO;
 import com.clintonbrito.crudspring.enums.Category;
 import com.clintonbrito.crudspring.enums.Status;
-import com.clintonbrito.crudspring.model.CourseModel;
+import com.clintonbrito.crudspring.model.Course;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CourseMapper {
 
-    public CourseDTO toDTO(CourseModel course) {
+    public CourseDTO toDTO(Course course) {
         if (course == null) {
             return null;
         }
@@ -17,12 +17,12 @@ public class CourseMapper {
     return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue());
     }
 
-    public CourseModel toEntity(CourseDTO courseDTO) {
+    public Course toEntity(CourseDTO courseDTO) {
         if (courseDTO == null) {
             return null;
         }
 
-        CourseModel course = new CourseModel();
+        Course course = new Course();
 
         if (courseDTO.id() != null) {
             course.setId(courseDTO.id());
