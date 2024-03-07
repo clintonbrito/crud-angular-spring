@@ -13,12 +13,15 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data // está incluso os getters e setters do Lombok
 @Entity // Estou dizendo que a classe CourseModel também será uma entidade que vai fazer o mapeamento no db
 @SQLDelete(sql = "UPDATE courses SET status = 'Inactive' WHERE id = ?")
 @SQLRestriction("status <> 'Inactive'")
 @Table(name = "courses")
-public class CourseModel {
+public class Course {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,5 +43,9 @@ public class CourseModel {
   @Column(length = 10, nullable = false)
   @Convert(converter = StatusConverter.class)
   private Status status = Status.ACTIVE;
+
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "course")
+//  @JoinColumn(name = "course_id")
+  private List<Lesson> lessons = new ArrayList<>();
 
 }
