@@ -48,8 +48,8 @@ export class CourseFormComponent implements OnInit {
       category: [course.category, [Validators.required]],
       lessons: this.formBuilder.array(this.retrieveLessons(course))
     });
-    console.log(this.form);
-    console.log(this.form.value);
+    // console.log(this.form);
+    // console.log(this.form.value);
 
 
   }
@@ -76,6 +76,16 @@ export class CourseFormComponent implements OnInit {
 
   getLessonsFormArray() {
     return (<UntypedFormArray>this.form.get('lessons')).controls;
+  }
+
+  addNewLesson() {
+    const lessons = this.form.get('lessons') as UntypedFormArray;
+    lessons.push(this.createLesson());
+  }
+
+  removeLesson(index: number) {
+    const lessons = this.form.get('lessons') as UntypedFormArray;
+    lessons.removeAt(index);
   }
 
   onSubmit() {
