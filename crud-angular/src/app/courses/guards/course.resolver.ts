@@ -10,37 +10,5 @@ export const courseResolver: ResolveFn<Course> =
     if(route.params['id']) {
       return inject(CoursesService).loadById(route.paramMap.get('id')!);
     }
-    return of({ _id: '', name: '', category: '' });
+    return of({ _id: '', name: '', category: '', lessons: [] });
   }
-
-// @Injectable()
-// export class CourseResolver {
-//   constructor(private coursesService: CoursesService) { }
-
-//   resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<Course> {
-//     if (route.params['id']) {
-//       return this.coursesService.findById(route.params['id']);
-//     }
-
-//     return of({ _id: '', name: '', category: '' });
-//   };
-// }
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-
-// export class CourseResolver {
-
-//   constructor(private coursesService: CoursesService) { }
-
-//     resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<Course> {
-
-//     if (route.params['id']) {
-//       return this.coursesService.findById(route.params['id']);
-//     }
-
-//     return of({ _id: '', nome: '', categoria: '' });
-//   };
-
-// }
