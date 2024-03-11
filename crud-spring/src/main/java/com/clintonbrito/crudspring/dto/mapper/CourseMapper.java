@@ -1,10 +1,13 @@
 package com.clintonbrito.crudspring.dto.mapper;
 
 import com.clintonbrito.crudspring.dto.CourseDTO;
+import com.clintonbrito.crudspring.dto.LessonDTO;
 import com.clintonbrito.crudspring.enums.Category;
 import com.clintonbrito.crudspring.enums.Status;
 import com.clintonbrito.crudspring.model.Course;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class CourseMapper {
@@ -14,12 +17,18 @@ public class CourseMapper {
             return null;
         }
 
-    return new CourseDTO(
-            course.getId(),
-            course.getName(),
-            course.getCategory().getValue(),
-            course.getLessons()
-        );
+        List<LessonDTO> lessons = course.getLessons()
+                .stream()
+                .map(lesson -> new LessonDTO(lesson.getId(), lesson.getName(), lesson.getYoutubeUrl()))
+//                .collect(Collectors.toList());
+                .toList();
+
+        return new CourseDTO(
+                course.getId(),
+                course.getName(),
+                course.getCategory().getValue(),
+                lessons
+            );
     }
 
     public Course toEntity(CourseDTO courseDTO) {
@@ -34,7 +43,6 @@ public class CourseMapper {
         }
 
         course.setName(courseDTO.name());
-//        TODO: use a mapper for Category
         course.setCategory(convertCategoryValue(courseDTO.category()));
         course.setStatus(Status.ACTIVE);
 
