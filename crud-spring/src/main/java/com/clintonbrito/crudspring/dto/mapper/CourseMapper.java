@@ -5,6 +5,7 @@ import com.clintonbrito.crudspring.dto.LessonDTO;
 import com.clintonbrito.crudspring.enums.Category;
 import com.clintonbrito.crudspring.enums.Status;
 import com.clintonbrito.crudspring.model.Course;
+import com.clintonbrito.crudspring.model.Lesson;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -45,6 +46,16 @@ public class CourseMapper {
         course.setName(courseDTO.name());
         course.setCategory(convertCategoryValue(courseDTO.category()));
         course.setStatus(Status.ACTIVE);
+
+        List<Lesson> lessons = courseDTO.lessons().stream().map(lessonDTO -> {
+            var lesson = new Lesson();
+            lesson.setId(lessonDTO.id());
+            lesson.setName(lessonDTO.name());
+            lesson.setYoutubeUrl(lessonDTO.youtubeUrl());
+            lesson.setCourse(course);
+            return lesson;
+        }).toList();
+        course.setLessons(lessons);
 
         return course;
 
