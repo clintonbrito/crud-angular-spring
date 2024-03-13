@@ -11,7 +11,7 @@
         <mat-hint align="start">{{name.value.length}} / 100</mat-hint>
 
         @if (form.get('name')?.invalid) {
-          <mat-error>{{ getErrorMessage('name') }}</mat-error>
+          <mat-error>{{ formUtils.getErrorMessage(form, 'name') }}</mat-error>
         }
 
       </mat-form-field>
@@ -20,13 +20,12 @@
         <mat-label>Category</mat-label>
 
         <mat-select formControlName="category">
-          <mat-option value="null"></mat-option>
           <mat-option value="Front-end">Front-end</mat-option>
           <mat-option value="Back-end">Back-end</mat-option>
         </mat-select>
 
         @if (form.get('category')?.invalid) {
-          <mat-error>{{ getErrorMessage('category') }}</mat-error>
+          <mat-error>{{ formUtils.getErrorMessage(form, 'category') }}</mat-error>
         }
 
       </mat-form-field>
@@ -38,7 +37,7 @@
         </button>
       </mat-toolbar>
 
-      @if (isFormArrayRequires()) {
+      @if (formUtils.isFormArrayRequired(form, 'lessons')) {
         <mat-error class="form-array-error">Add at least one lesson</mat-error>
       }
 
@@ -53,7 +52,9 @@
               <mat-label>Lesson name</mat-label>
               <input matInput formControlName="name"/>
               @if (getLessonsFormArray()[i].get('name')?.invalid) {
-                <mat-error>Invalid field</mat-error>
+                <mat-error>
+                  {{ formUtils.getFormArrayFieldErrorMessage(form, 'lessons', 'name', i) }}
+                </mat-error>
               }
             </mat-form-field>
           </td>
@@ -63,7 +64,9 @@
               <span matTextPrefix>https://youtu.be/</span>
               <input matInput formControlName="youtubeUrl"/>
               @if (getLessonsFormArray()[i].get('youtubeUrl')?.invalid) {
-                <mat-error>Invalid field</mat-error>
+                <mat-error>
+                  {{ formUtils.getFormArrayFieldErrorMessage(form, 'lessons', 'youtubeUrl', i) }}
+                </mat-error>
               }
             </mat-form-field>
           </td>
