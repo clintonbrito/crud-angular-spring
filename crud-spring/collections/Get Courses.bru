@@ -5,7 +5,12 @@ meta {
 }
 
 get {
-  url: {{baseURL}}/api/courses
+  url: {{baseURL}}/api/courses?page=0&pageSize=100
   body: none
   auth: none
+}
+
+query {
+  page: 0
+  pageSize: 100
 }

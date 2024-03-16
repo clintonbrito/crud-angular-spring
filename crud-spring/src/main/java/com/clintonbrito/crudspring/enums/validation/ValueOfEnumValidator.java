@@ -19,7 +19,7 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ch
 
     @Override
     public boolean isValid(CharSequence value, ConstraintValidatorContext context) {
-//        if (value == null || "".equals(value.toString().trim())) {  
+//        if (value == null || "".equals(value.toString().trim())) {
         if (value == null || value.toString().trim().isEmpty()) {
             return true;
         }
@@ -29,11 +29,9 @@ public class ValueOfEnumValidator implements ConstraintValidator<ValueOfEnum, Ch
             context.buildConstraintViolationWithTemplate(
                             "must be any of enum " + acceptedValues)
                     .addConstraintViolation();
-
             return false;
 
         }
-
 
         return acceptedValues.contains(value.toString());
     }

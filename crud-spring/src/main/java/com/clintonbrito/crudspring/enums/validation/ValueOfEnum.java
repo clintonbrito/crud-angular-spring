@@ -20,3 +20,5 @@ public @interface ValueOfEnum {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
+
+// Reference: https://www.baeldung.com/javax-validations-enums
